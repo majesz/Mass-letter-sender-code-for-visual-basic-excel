@@ -1,0 +1,42 @@
+Private Sub CommandButton1_Click()
+Dim Outlookprogi As Object
+Dim Email As Object
+ 
+For i = 1 To Sheet1.Cells(Rows.Count, 1).End(xlUp).Row
+ 
+If Not Worksheets("Sheet1").Cells(i, 4).Value = x Then
+ 
+Else
+ 
+Set Outlookprogi = CreateObject("Outlook.Application")
+Set Email = Outlookprogi.CreateItem(0)
+ 
+On Error Resume Next
+ 
+With Email
+ 
+.to = Worksheets("Sheet1").Cells(i, 1).Value
+.CC = ""
+.Subject = Worksheets("Sheet1").Cells(i, 2).Value
+.Attached = "C:\Users\emajor\Desktop\0896_001"
+.Body = Worksheets("Sheet1").Cells(i, 3).Value
+.Send
+ 
+End With
+ 
+Set Email = Nothing
+Set Outlookprogi = Nothing
+ 
+Range("G1").Select
+Selection.Copy
+Cells(i, 4).Select
+ActiveSheet.Paste
+Application.CutCopyMode = True
+ 
+End If
+ 
+Next
+ 
+MsgBox "Gratulálok, sikeresen elküldtél minden üzenetet! v.0.2 developed by:M.Erik"
+ 
+End Sub
